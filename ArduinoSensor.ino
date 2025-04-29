@@ -17,7 +17,6 @@ void setup() {
 void gasDetector(){
   int gasRead = analogRead(sensorGas);
   
-
   if(gasRead >= limitGas){
     Serial.println("Gás detectado! ⚠️");
     Serial.print("Valor lido MQ-09: ");
