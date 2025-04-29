@@ -16,15 +16,18 @@ void setup() {
 
 void gasDetector(){
   int gasRead = analogRead(sensorGas);
+  
 
   if(gasRead >= limitGas){
     Serial.println("Gás detectado! ⚠️");
     Serial.print("Valor lido MQ-09: ");
     Serial.println(gasRead);
 
-    digitialWrite(buzzer, HIGH);
+    digitalWrite(buzzer, HIGH);
     digitalWrite(ledGas, HIGH);
     delay(3000);
+  }else{
+    digitalWrite(ledGas, LOW);
   }
 }
 
@@ -39,12 +42,15 @@ void flameDectetor(){
     digitalWrite(buzzer, HIGH);
     digitalWrite(ledFlame, HIGH);
     delay(3000) ;   
+  }else{
+    digitalWrite(ledFlame, LOW);
   }
+
 }
 
 void loop() {
-  gasDectetor();
-  flameDectetor();
+  gasDetector();
+  flameDectetor();  
 
   delay(3000);
 }
