@@ -14,10 +14,10 @@ void setup() {
   Serial.begin(9600);
 }
 
-void gasDetector(){
+void gasDetector() {
   int gasRead = analogRead(sensorGas);
-  
-  if(gasRead >= limitGas){
+
+  if (gasRead >= limitGas) {
     Serial.println("Gás detectado! ⚠️");
     Serial.print("Valor lido MQ-09: ");
     Serial.println(gasRead);
@@ -25,30 +25,32 @@ void gasDetector(){
     digitalWrite(buzzer, HIGH);
     digitalWrite(ledGas, HIGH);
     delay(3000);
-  }else{
+  } else {
+    digitalWrite(buzzer, LOW);
     digitalWrite(ledGas, LOW);
   }
 }
 
-void flameDectetor(){
+void flameDectetor() {
   int flameRead = analogRead(sensorFlame);
 
-  if(flameRead <= limitFlame){
+  if (flameRead <= limitFlame) {
     Serial.println("Fogo detectado! 🔥");
     Serial.print("Valor lido Flame: ");
     Serial.println(flameRead);
 
     digitalWrite(buzzer, HIGH);
     digitalWrite(ledFlame, HIGH);
-    delay(3000) ;   
-  }else{
+    delay(3000);
+  } else {
+    digitalWrite(buzzer, LOW);
     digitalWrite(ledFlame, LOW);
   }
 }
 
 void loop() {
   gasDetector();
-  flameDectetor();  
+  flameDectetor();
 
   delay(3000);
 }
