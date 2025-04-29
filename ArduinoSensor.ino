@@ -44,7 +44,7 @@ void flameDectetor(){
 
 void loop() {
   gasDectetor();
-  gasDectetor();  
+  flameDectetor();
 
   delay(3000);
 }
