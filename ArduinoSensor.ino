@@ -44,7 +44,6 @@ void flameDectetor(){
   }else{
     digitalWrite(ledFlame, LOW);
   }
-
 }
 
 void loop() {
