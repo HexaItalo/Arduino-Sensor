@@ -1,12 +1,12 @@
 const int sensorGas = A0;
 const int limitGas = 500;
-const int sensorFlame = A1;
-const int limitFlame = 500;
-const int ledGas = 2;
-const int ledFlame = 3;
-const int buzzer = 4;
+const int flamePin = 2;
+const int ledGas = 3;
+const int ledFlame = 4;
+const int buzzer = 5;
 
 void setup() {
+  pinMode(flamePin, INPUT);
   pinMode(ledGas, OUTPUT);
   pinMode(ledFlame, OUTPUT);
   pinMode(buzzer, OUTPUT);
@@ -14,43 +14,43 @@ void setup() {
   Serial.begin(9600);
 }
 
-void gasDetector() {
+void gasDectetor(){
   int gasRead = analogRead(sensorGas);
 
-  if (gasRead >= limitGas) {
+  if(gasRead >= limitGas) {
     Serial.println("Gás detectado! ⚠️");
-    Serial.print("Valor lido MQ-09: ");
+    Serial.print("valor lido do MQ-09: ");
     Serial.println(gasRead);
 
-    digitalWrite(buzzer, HIGH);
-    digitalWrite(ledGas, HIGH);
-    delay(3000);
-  } else {
     digitalWrite(buzzer, LOW);
+    digitalWrite(ledGas, HIGH);
+  } else {
+    digitalWrite(buzzer, HIGH);
     digitalWrite(ledGas, LOW);
   }
 }
 
 void flameDectetor() {
-  int flameRead = analogRead(sensorFlame);
+  int flameRead = digitalRead(flamePin);
+  Serial.println(flameRead);
 
-  if (flameRead <= limitFlame) {
+  if(flameRead != 1){
     Serial.println("Fogo detectado! 🔥");
     Serial.print("Valor lido Flame: ");
     Serial.println(flameRead);
 
-    digitalWrite(buzzer, HIGH);
-    digitalWrite(ledFlame, HIGH);
-    delay(3000);
-  } else {
     digitalWrite(buzzer, LOW);
+    digitalWrite(ledFlame, HIGH);
+  } else {
+    digitalWrite(buzzer, HIGH);
     digitalWrite(ledFlame, LOW);
   }
 }
 
-void loop() {
-  gasDetector();
+void loop(){
+  gasDectetor();
+  delay(200);
   flameDectetor();
 
-  delay(3000);
+  delay(1000);
 }
